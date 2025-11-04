@@ -2,35 +2,62 @@ Proyecto Panadería - Django
 Te ayudo a crear el proyecto completo de la panadería paso a paso. Voy a crear toda la estructura de archivos y código necesario.
 
 Estructura completa del proyecto:
-text
 UIII_Panadería_0501/
+
 ├── .venv/
+
 ├── backend_Panaderia/
+
 │   ├── backend_Panaderia/
+
 │   │   ├── __init__.py
+
 │   │   ├── settings.py
+
 │   │   ├── urls.py
+
 │   │   └── wsgi.py
+
 │   └── manage.py
+
 ├── app_Panaderia/
+
 │   ├── __init__.py
+
 │   ├── admin.py
+
 │   ├── apps.py
+
 │   ├── models.py
+
 │   ├── tests.py
+
 │   ├── views.py
+
 │   ├── urls.py
+
 │   └── templates/
+
 │       ├── app_Panaderia/
+
 │       │   ├── base.html
+
 │       │   ├── header.html
+
 │       │   ├── navbar.html
+
 │       │   ├── footer.html
+
 │       │   ├── inicio.html
+
 │       │   └── ingredientes/
+
 │       │       ├── agregar_ingrediente.html
+
 │       │       ├── ver_ingredientes.html
+
 │       │       ├── actualizar_ingrediente.html
+
 │       │       └── borrar_ingrediente.html
 Procedimientos paso a paso:
 1. Crear carpeta del proyecto
@@ -604,5 +631,3 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver 8014
 El proyecto estará completamente funcional en http://127.0.0.1:8014/ con todas las operaciones CRUD para ingredientes y una interfaz moderna y atractiva.
-
-
