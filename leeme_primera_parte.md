@@ -135,33 +135,35 @@ from django.db import models
 Con el entorno activado y en la raíz del proyecto:
 code
 Bash
-python manage.py makemigrations
-python manage.py migrate
+
+    python manage.py makemigrations
+    python manage.py migrate
 15 — En views.py de app_Panaderia crear las funciones con sus códigos correspondientes
 Crea/edita app_Panaderia/views.py con las siguientes funciones para el modelo Ingrediente, sin usar forms.py y manejando POST manualmente:
 code
 Python
-# app_Panaderia/views.py
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Ingrediente
-from django.urls import reverse
-from django.utils import timezone
+app_Panaderia/views.py
 
-def inicio_panaderia(request):
-    # Página principal de la app
-    # Obtener el año actual para el footer
-    now = timezone.now()
-    return render(request, 'inicio.html', {'now': now})
+    from django.shortcuts import render, redirect, get_object_or_404
+    from .models import Ingrediente
+    from django.urls import reverse
+    from django.utils import timezone
 
-def agregar_ingrediente(request):
-    if request.method == 'POST':
-        nombre = request.POST.get('nombre', '').strip()
-        descripcion = request.POST.get('descripcion', '').strip() or None
-        unidad_medida = request.POST.get('unidad_medida', '').strip()
-        costo_unitario = request.POST.get('costo_unitario')
-        proveedor = request.POST.get('proveedor', '').strip() or None
-        fecha_compra = request.POST.get('fecha_compra')
-        stock_disponible = request.POST.get('stock_disponible')
+    def inicio_panaderia(request):
+        # Página principal de la app
+        # Obtener el año actual para el footer
+        now = timezone.now()
+        return render(request, 'inicio.html', {'now': now})
+
+    def agregar_ingrediente(request):
+        if request.method == 'POST':
+            nombre = request.POST.get('nombre', '').strip()
+            descripcion = request.POST.get('descripcion', '').strip() or None
+            unidad_medida = request.POST.get('unidad_medida', '').strip()
+            costo_unitario = request.POST.get('costo_unitario')
+            proveedor = request.POST.get('proveedor', '').strip() or None
+            fecha_compra = request.POST.get('fecha_compra')
+            stock_disponible = request.POST.get('stock_disponible')
 
         ingrediente = Ingrediente(
             nombre=nombre,
@@ -175,36 +177,36 @@ def agregar_ingrediente(request):
         ingrediente.save()
         return redirect('ver_ingredientes')
     return render(request, 'ingredientes/agregar_ingrediente.html', {})
-
-def ver_ingredientes(request):
-    ingredientes = Ingrediente.objects.all().order_by('nombre')
-    return render(request, 'ingredientes/ver_ingredientes.html', {'ingredientes': ingredientes})
-
-def actualizar_ingrediente(request, ingrediente_id):
-    ingrediente = get_object_or_404(Ingrediente, id=ingrediente_id)
-    return render(request, 'ingredientes/actualizar_ingrediente.html', {'ingrediente': ingrediente})
-
-def realizar_actualizacion_ingrediente(request, ingrediente_id):
-    ingrediente = get_object_or_404(Ingrediente, id=ingrediente_id)
-    if request.method == 'POST':
-        ingrediente.nombre = request.POST.get('nombre', ingrediente.nombre).strip()
-        ingrediente.descripcion = request.POST.get('descripcion', ingrediente.descripcion).strip() or None
-        ingrediente.unidad_medida = request.POST.get('unidad_medida', ingrediente.unidad_medida).strip()
-        ingrediente.costo_unitario = request.POST.get('costo_unitario', ingrediente.costo_unitario)
-        ingrediente.proveedor = request.POST.get('proveedor', ingrediente.proveedor).strip() or None
-        ingrediente.fecha_compra = request.POST.get('fecha_compra', ingrediente.fecha_compra)
-        ingrediente.stock_disponible = request.POST.get('stock_disponible', ingrediente.stock_disponible)
-        ingrediente.save()
-        return redirect('ver_ingredientes')
-    # Si se accede por GET, redirigir al formulario de edición
-    return redirect('actualizar_ingrediente', ingrediente_id=ingrediente.id)
-
-def borrar_ingrediente(request, ingrediente_id):
-    ingrediente = get_object_or_404(Ingrediente, id=ingrediente_id)
-    if request.method == 'POST':
-        ingrediente.delete()
-        return redirect('ver_ingredientes')
-    return render(request, 'ingredientes/borrar_ingrediente.html', {'ingrediente': ingrediente})
+    
+    def ver_ingredientes(request):
+        ingredientes = Ingrediente.objects.all().order_by('nombre')
+        return render(request, 'ingredientes/ver_ingredientes.html', {'ingredientes': ingredientes})
+    
+    def actualizar_ingrediente(request, ingrediente_id):
+        ingrediente = get_object_or_404(Ingrediente, id=ingrediente_id)
+        return render(request, 'ingredientes/actualizar_ingrediente.html', {'ingrediente': ingrediente})
+    
+    def realizar_actualizacion_ingrediente(request, ingrediente_id):
+        ingrediente = get_object_or_404(Ingrediente, id=ingrediente_id)
+        if request.method == 'POST':
+            ingrediente.nombre = request.POST.get('nombre', ingrediente.nombre).strip()
+            ingrediente.descripcion = request.POST.get('descripcion', ingrediente.descripcion).strip() or None
+            ingrediente.unidad_medida = request.POST.get('unidad_medida', ingrediente.unidad_medida).strip()
+            ingrediente.costo_unitario = request.POST.get('costo_unitario', ingrediente.costo_unitario)
+            ingrediente.proveedor = request.POST.get('proveedor', ingrediente.proveedor).strip() or None
+            ingrediente.fecha_compra = request.POST.get('fecha_compra', ingrediente.fecha_compra)
+            ingrediente.stock_disponible = request.POST.get('stock_disponible', ingrediente.stock_disponible)
+            ingrediente.save()
+            return redirect('ver_ingredientes')
+        # Si se accede por GET, redirigir al formulario de edición
+        return redirect('actualizar_ingrediente', ingrediente_id=ingrediente.id)
+    
+    def borrar_ingrediente(request, ingrediente_id):
+        ingrediente = get_object_or_404(Ingrediente, id=ingrediente_id)
+        if request.method == 'POST':
+            ingrediente.delete()
+            return redirect('ver_ingredientes')
+        return render(request, 'ingredientes/borrar_ingrediente.html', {'ingrediente': ingrediente})
 16 — Crear la estructura de carpetas templates y ingredientes
 Crea la siguiente estructura de carpetas y archivos dentro de app_Panaderia/:
 code
