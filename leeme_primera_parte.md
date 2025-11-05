@@ -70,7 +70,8 @@ Abre tu navegador web y pega: http://127.0.0.1:8014/ (o el link que muestre la c
 Con el entorno virtual activado y en la raíz del proyecto (UIII_Panadería_0501):
 code
 Bash
-python manage.py startapp app_Panaderia
+
+    python manage.py startapp app_Panaderia
 13 — models.py (Modelo: Ingrediente)
 Crea/edita app_Panaderia/models.py con el siguiente contenido. Por ahora, solo usaremos el modelo Ingrediente.
 code
@@ -81,14 +82,14 @@ from django.db import models
 # ==========================================
 # MODELO: Ingrediente
 # ==========================================
-class Ingrediente(models.Model):
-    nombre = models.CharField(max_length=100)
-    descripcion = models.TextField(blank=True, null=True)
-    unidad_medida = models.CharField(max_length=50)
-    costo_unitario = models.DecimalField(max_digits=10, decimal_places=2)
-    proveedor = models.CharField(max_length=100, blank=True, null=True)
-    fecha_compra = models.DateField()
-    stock_disponible = models.DecimalField(max_digits=10, decimal_places=2)
+    class Ingrediente(models.Model):
+        nombre = models.CharField(max_length=100)
+        descripcion = models.TextField(blank=True, null=True)
+        unidad_medida = models.CharField(max_length=50)
+        costo_unitario = models.DecimalField(max_digits=10, decimal_places=2)
+        proveedor = models.CharField(max_length=100, blank=True, null=True)
+        fecha_compra = models.DateField()
+        stock_disponible = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
         return self.nombre
@@ -97,38 +98,39 @@ class Ingrediente(models.Model):
         verbose_name = "Ingrediente"
         verbose_name_plural = "Ingredientes"
 # ==========================================
+ MODELO: Receta (Pendiente por ahora)
 
-# MODELO: Receta (Pendiente por ahora)
-# class Receta(models.Model):
-#     nombre = models.CharField(max_length=100)
-#     descripcion = models.TextField(blank=True, null=True)
-#     tiempo_preparacion = models.IntegerField(help_text="Tiempo en minutos")
-#     fecha_creacion = models.DateField()
-#     autor = models.CharField(max_length=100)
-#     ingredientes = models.ManyToManyField(Ingrediente, related_name='recetas')
-#
-#     def __str__(self):
-#         return self.nombre
-#
-#     class Meta:
-#         verbose_name = "Receta"
-#         verbose_name_plural = "Recetas"
+     class Receta(models.Model):
+         nombre = models.CharField(max_length=100)
+         descripcion = models.TextField(blank=True, null=True)
+         tiempo_preparacion = models.IntegerField(help_text="Tiempo en minutos")
+         fecha_creacion = models.DateField()
+         autor = models.CharField(max_length=100)
+         ingredientes = models.ManyToManyField(Ingrediente, related_name='recetas')
+
+     def __str__(self):
+         return self.nombre
+
+     class Meta:
+         verbose_name = "Receta"
+        verbose_name_plural = "Recetas"
 # # ==========================================
 # MODELO: Producto (Pendiente por ahora)
-# class Producto(models.Model):
-#     nombre = models.CharField(max_length=100)
-#     descripcion = models.TextField(blank=True, null=True)
-#     precio_venta = models.DecimalField(max_digits=10, decimal_places=2)
-#     fecha_elaboracion = models.DateField()
-#     fecha_vencimiento = models.DateField()
-#     receta = models.ForeignKey(Receta, on_delete=models.CASCADE, related_name='productos')
-#
-#     def __str__(self):
-#         return f"{self.nombre} (${self.precio_venta})"
-#
-#     class Meta:
-#         verbose_name = "Producto"
-#         verbose_name_plural = "Productos"
+
+     class Producto(models.Model):
+         nombre = models.CharField(max_length=100)
+         descripcion = models.TextField(blank=True, null=True)
+         precio_venta = models.DecimalField(max_digits=10, decimal_places=2)
+         fecha_elaboracion = models.DateField()
+         fecha_vencimiento = models.DateField()
+         receta = models.ForeignKey(Receta, on_delete=models.CASCADE, related_name='productos')
+
+     def __str__(self):
+         return f"{self.nombre} (${self.precio_venta})"
+
+     class Meta:
+         verbose_name = "Producto"
+         verbose_name_plural = "Productos"
 14 — Procedimiento para realizar las migraciones (makemigrations y migrate)
 Con el entorno activado y en la raíz del proyecto:
 code
