@@ -422,7 +422,7 @@ Html
       </form>
     </div>
     {% endblock %}
-    ver_ingredientes.html
+ver_ingredientes.html
 code
 Html
     
@@ -471,9 +471,10 @@ Html
       {% endif %}
     </div>
     {% endblock %}
-    actualizar_ingrediente.html
+actualizar_ingrediente.html
     code
     Html
+    
     {% extends 'base.html' %}
     {% block title %}Actualizar Ingrediente{% endblock %}
     {% block content %}
@@ -514,9 +515,10 @@ Html
       </form>
     </div>
     {% endblock %}
-    borrar_ingrediente.html
+ borrar_ingrediente.html
     code
     Html
+    
     {% extends 'base.html' %}
     {% block title %}Borrar Ingrediente{% endblock %}
     {% block content %}
@@ -538,7 +540,6 @@ Html
 Crea app_Panaderia/urls.py:
 
 Python
-    # app_Panaderia/urls.py
     
     from django.urls import path
     from . import views
@@ -570,55 +571,57 @@ Además, asegúrate de que 'django.template.context_processors.request' esté en
 code
 Python
 # backend_Panaderia/settings.py
-TEMPLATES = [
-    {
-        # ...
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request', # Asegúrate de que esta línea esté presente
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
+    TEMPLATES = [
+        {
+            # ...
+            'OPTIONS': {
+                'context_processors': [
+                    'django.template.context_processors.debug',
+                    'django.template.context_processors.request', # Asegúrate de que esta línea esté presente
+                    'django.contrib.auth.context_processors.auth',
+                    'django.contrib.messages.context_processors.messages',
+                ],
+            },
         },
-    },
-]
+    ]
 24 — Realizar las configuraciones correspondiente a urls.py de backend_Panaderia para enlazar con app_Panaderia
 Edita backend_Panaderia/urls.py:
 code
 Python
 # backend_Panaderia/urls.py
-from django.contrib import admin
-from django.urls import path, include
-
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('app_Panaderia.urls')), # Ruta raíz para la app de Panadería
-]
+    from django.contrib import admin
+    from django.urls import path, include
+    
+    urlpatterns = [
+        path('admin/', admin.site.urls),
+        path('', include('app_Panaderia.urls')), # Ruta raíz para la app de Panadería
+    ]
 25 — Procedimiento para registrar los modelos en admin.py y volver a realizar las migraciones
 Edita app_Panaderia/admin.py para registrar el modelo Ingrediente:
 code
 Python
 # app_Panaderia/admin.py
-from django.contrib import admin
-from .models import Ingrediente # Solo Ingrediente por ahora
-
-@admin.register(Ingrediente)
-class IngredienteAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'unidad_medida', 'costo_unitario', 'proveedor', 'fecha_compra', 'stock_disponible')
-    search_fields = ('nombre', 'proveedor')
-    list_filter = ('unidad_medida', 'proveedor', 'fecha_compra')
-    date_hierarchy = 'fecha_compra' # Para una navegación por fechas en el admin
+    from django.contrib import admin
+    from .models import Ingrediente # Solo Ingrediente por ahora
+    
+    @admin.register(Ingrediente)
+    class IngredienteAdmin(admin.ModelAdmin):
+        list_display = ('nombre', 'unidad_medida', 'costo_unitario', 'proveedor', 'fecha_compra', 'stock_disponible')
+        search_fields = ('nombre', 'proveedor')
+        list_filter = ('unidad_medida', 'proveedor', 'fecha_compra')
+        date_hierarchy = 'fecha_compra' # Para una navegación por fechas en el admin
 Después de registrar el modelo en admin.py, es una buena práctica (aunque no estrictamente necesario si no has modificado el modelo en sí) volver a realizar las migraciones para asegurarte de que todo esté sincronizado.
 code
 Bash
-python manage.py makemigrations app_Panaderia
-python manage.py migrate
+
+    python manage.py makemigrations app_Panaderia
+    python manage.py migrate
 26 — Crear superusuario (opcional para probar admin)
 Si aún no tienes un superusuario, créalo para acceder al panel de administración de Django:
 code
 Bash
-python manage.py createsuperuser
+
+    python manage.py createsuperuser
 Sigue las instrucciones en la terminal (nombre de usuario, email, contraseña).
 27 — Proyecto totalmente funcional y ejecución final
 Con todas las instrucciones anteriores, el proyecto debería estar totalmente funcional para la gestión de Ingredientes:
