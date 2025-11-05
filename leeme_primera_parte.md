@@ -1,54 +1,57 @@
 
 Model
-¡Excelente! Aquí tienes la primera parte del proyecto "Panadería" con todas las especificaciones que solicitaste, siguiendo la estructura y los pasos detallados para que puedas implementarlo fácilmente en VS Code con Python/Django.
-Proyecto: Panadería
-Lenguaje: Python
-Framework: Django
-Editor: VS Code
-1 — Estructura general y nombres
-Proyecto raíz: UIII_Panadería_0501
-Proyecto Django (backend): backend_Panaderia
-App: app_Panaderia
-2 — Procedimiento para crear carpeta del Proyecto: UIII_Panadería_0501
-En tu sistema (Terminal):
-code
-Bash
-mkdir UIII_Panadería_0501
-cd UIII_Panadería_0501
-3 — Procedimiento para abrir VS Code sobre la carpeta UIII_Panadería_0501
-En la misma carpeta UIII_Panadería_0501:
-code
-Bash
+¡Excelente! Aquí tienes la primera parte del proyecto "Panadería" con todas las especificaciones que solicitaste, siguiendo la estructura y los pasos detallados para que puedas implementarlo fácilmente en VS Code con Python/Django.  
+Proyecto: Panadería  
+Lenguaje: Python  
+Framework: Django  
+Editor: VS Code  
+1 — Estructura general y nombres  
+Proyecto raíz: UIII_Panadería_0501  
+Proyecto Django (backend): backend_Panaderia  
+App: app_Panaderia  
+2 — Procedimiento para crear carpeta del Proyecto: UIII_Panadería_0501  
+En tu sistema (Terminal):  
+code  
+Bash  
+mkdir UIII_Panadería_0501  
+cd UIII_Panadería_0501  
+3 — Procedimiento para abrir VS Code sobre la carpeta UIII_Panadería_0501  
+En la misma carpeta UIII_Panadería_0501:  
+code  
+Bash  
 code .
-(Si code . no funciona, abre VS Code manualmente y selecciona File > Open Folder... y elige UIII_Panadería_0501.)
-4 — Procedimiento para abrir terminal en VS Code
-En VS Code: Terminal > New Terminal o usa el atajo (normalmente Ctrl+ñ o `Ctrl+`` dependiendo de tu configuración).
-5 — Procedimiento para crear carpeta entorno virtual “.venv” desde terminal de VS Code
-Dentro de la carpeta del proyecto UIII_Panadería_0501:
-code
-Bash
-python -m venv .venv
-(Esto crea la carpeta oculta .venv en UIII_Panadería_0501.)
-6 — Procedimiento para activar el entorno virtual
-En Windows PowerShell:
-code
-Powershell
-.venv\Scripts\Activate.ps1
-En Windows (cmd):
-code
-Cmd
-.venv\Scripts\activate
-En macOS / Linux:
-code
-Bash
-source .venv/bin/activate
-7 — Procedimiento para activar intérprete de Python en VS Code
-En VS Code, abre la paleta de comandos (Ctrl+Shift+P).
-Escribe Python: Select Interpreter.
-Selecciona el que apunta a .../UIII_Panadería_0501/.venv/bin/python (o equivalente en Windows .venv\Scripts\python.exe).
-8 — Procedimiento para instalar Django
-Con el entorno virtual activado:
-code
+(Si code . no funciona, abre VS Code manualmente y selecciona File > Open Folder... y elige UIII_Panadería_0501.)  
+4 — Procedimiento para abrir terminal en VS Code  
+En VS Code: Terminal > New Terminal o usa el atajo (normalmente Ctrl+ñ o `Ctrl+`` dependiendo de tu configuración).  
+5 — Procedimiento para crear carpeta entorno virtual “.venv” desde terminal de VS Code  
+Dentro de la carpeta del proyecto UIII_Panadería_0501:   
+code  
+Bash  
+
+    python -m venv .venv
+(Esto crea la carpeta oculta .venv en UIII_Panadería_0501.)  
+6 — Procedimiento para activar el entorno virtual  
+En Windows PowerShell:  
+code  
+Powershell  
+
+    .venv\Scripts\Activate.ps1
+En Windows (cmd):  
+code  
+Cmd   
+
+    .venv\Scripts\activate
+En macOS / Linux:  
+code  
+Bash  
+source .venv/bin/activate  
+7 — Procedimiento para activar intérprete de Python en VS Code  
+En VS Code, abre la paleta de comandos (Ctrl+Shift+P).  
+Escribe Python: Select Interpreter  
+Selecciona el que apunta a .../UIII_Panadería_0501/.venv/bin/python (o equivalente en Windows .venv\Scripts\python.exe  
+8 — Procedimiento para instalar Django  
+Con el entorno virtual activado:  
+code  
 Bash
 pip install --upgrade pip
 pip install django
@@ -283,10 +286,11 @@ Html
       {% block extra_js %}{% endblock %}
     </body>
     </html>
-    18 — navbar.html (Incluir opciones con iconos)
+18 — navbar.html (Incluir opciones con iconos)
     Edita app_Panaderia/templates/navbar.html:
-    code
-    Html
+code
+Html
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
       <div class="container">
         <a class="navbar-brand" href="{% url 'inicio_panaderia' %}">🍞 Sistema de Administración Panadería</a>
@@ -341,220 +345,227 @@ Html
 Edita app_Panaderia/templates/footer.html:
 code
 Html
-<footer class="text-center">
-  <div class="container">
-    <small>
-      &copy; {{ now|date:"Y" }} Derechos reservados. Creado por Técn. Eliseo García, Cbtis 128.
-    </small>
-  </div>
-</footer>
-Nota: {{ now|date:"Y" }} funcionará porque timezone.now() se pasa desde la vista inicio_panaderia.
-20 — inicio.html (Información del sistema y una imagen de panadería)
-Edita app_Panaderia/templates/inicio.html:
-code
-Html
-{% extends 'base.html' %}
-{% block title %}Inicio - Panadería{% endblock %}
-{% block content %}
-<div class="row align-items-center">
-  <div class="col-md-7">
-    <h1 class="display-4">Bienvenido al sistema de administración de Panadería</h1>
-    <p class="lead">Gestiona tus ingredientes, recetas y productos de manera eficiente. Usa el menú superior para navegar por las diferentes secciones del sistema.</p>
-    <hr class="my-4">
-    <p>Empieza gestionando tus ingredientes para asegurar que siempre tengas lo necesario para tus deliciosas creaciones.</p>
-    <a href="{% url 'ver_ingredientes' %}" class="btn btn-primary btn-lg">Ver Ingredientes</a>
-  </div>
-  <div class="col-md-5">
-    <img src="https://images.unsplash.com/photo-1588636100913-9037c7891cf1?w=800&q=80" class="img-fluid rounded shadow-sm" alt="Panadería artesanal">
-  </div>
-</div>
-{% endblock %}
-(Imagen tomada desde la red — URL pública de Unsplash.)
-21 — Templates de Ingredientes (sin validación)
-Crea los siguientes archivos dentro de app_Panaderia/templates/ingredientes/.
-agregar_ingrediente.html
-code
-Html
-{% extends 'base.html' %}
-{% block title %}Agregar Ingrediente{% endblock %}
-{% block content %}
-<div class="card shadow-sm p-4">
-  <h2 class="card-title mb-4">Agregar Nuevo Ingrediente</h2>
-  <form method="post">
-    {% csrf_token %}
-    <div class="mb-3">
-      <label for="nombre" class="form-label">Nombre</label>
-      <input type="text" name="nombre" id="nombre" class="form-control" required>
-    </div>
-    <div class="mb-3">
-      <label for="descripcion" class="form-label">Descripción</label>
-      <textarea name="descripcion" id="descripcion" class="form-control"></textarea>
-    </div>
-    <div class="mb-3">
-      <label for="unidad_medida" class="form-label">Unidad de Medida</label>
-      <input type="text" name="unidad_medida" id="unidad_medida" class="form-control" required>
-    </div>
-    <div class="mb-3">
-      <label for="costo_unitario" class="form-label">Costo Unitario</label>
-      <input type="number" name="costo_unitario" id="costo_unitario" class="form-control" step="0.01" required>
-    </div>
-    <div class="mb-3">
-      <label for="proveedor" class="form-label">Proveedor</label>
-      <input type="text" name="proveedor" id="proveedor" class="form-control">
-    </div>
-    <div class="mb-3">
-      <label for="fecha_compra" class="form-label">Fecha de Compra</label>
-      <input type="date" name="fecha_compra" id="fecha_compra" class="form-control" required>
-    </div>
-    <div class="mb-3">
-      <label for="stock_disponible" class="form-label">Stock Disponible</label>
-      <input type="number" name="stock_disponible" id="stock_disponible" class="form-control" step="0.01" required>
-    </div>
-    <button type="submit" class="btn btn-primary me-2">Guardar Ingrediente</button>
-    <a href="{% url 'ver_ingredientes' %}" class="btn btn-secondary">Cancelar</a>
-  </form>
-</div>
-{% endblock %}
-ver_ingredientes.html
-code
-Html
-{% extends 'base.html' %}
-{% block title %}Ver Ingredientes{% endblock %}
-{% block content %}
-<div class="card shadow-sm p-4">
-  <h2 class="card-title mb-4">Lista de Ingredientes</h2>
-  <a href="{% url 'agregar_ingrediente' %}" class="btn btn-success mb-3"><i class="bi bi-plus-circle"></i> Agregar Ingrediente</a>
-  {% if ingredientes %}
-  <div class="table-responsive">
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Unidad de Medida</th>
-          <th>Costo Unitario</th>
-          <th>Proveedor</th>
-          <th>Fecha de Compra</th>
-          <th>Stock Disponible</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for ingrediente in ingredientes %}
-        <tr>
-          <td>{{ ingrediente.nombre }}</td>
-          <td>{{ ingrediente.unidad_medida }}</td>
-          <td>${{ ingrediente.costo_unitario }}</td>
-          <td>{{ ingrediente.proveedor|default:"N/A" }}</td>
-          <td>{{ ingrediente.fecha_compra }}</td>
-          <td>{{ ingrediente.stock_disponible }}</td>
-          <td>
-            <a class="btn btn-sm btn-info me-1" href="{% url 'actualizar_ingrediente' ingrediente.id %}"><i class="bi bi-pencil-square"></i> Editar</a>
-            <a class="btn btn-sm btn-danger" href="{% url 'borrar_ingrediente' ingrediente.id %}"><i class="bi bi-trash"></i> Borrar</a>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-  {% else %}
-  <div class="alert alert-info mt-3" role="alert">
-    No hay ingredientes registrados. ¡Empieza agregando uno!
-  </div>
-  {% endif %}
-</div>
-{% endblock %}
-actualizar_ingrediente.html
-code
-Html
-{% extends 'base.html' %}
-{% block title %}Actualizar Ingrediente{% endblock %}
-{% block content %}
-<div class="card shadow-sm p-4">
-  <h2 class="card-title mb-4">Editar Ingrediente</h2>
-  <form method="post" action="{% url 'realizar_actualizacion_ingrediente' ingrediente.id %}">
-    {% csrf_token %}
-    <div class="mb-3">
-      <label for="nombre" class="form-label">Nombre</label>
-      <input type="text" name="nombre" id="nombre" value="{{ ingrediente.nombre }}" class="form-control" required>
-    </div>
-    <div class="mb-3">
-      <label for="descripcion" class="form-label">Descripción</label>
-      <textarea name="descripcion" id="descripcion" class="form-control">{{ ingrediente.descripcion|default:"" }}</textarea>
-    </div>
-    <div class="mb-3">
-      <label for="unidad_medida" class="form-label">Unidad de Medida</label>
-      <input type="text" name="unidad_medida" id="unidad_medida" value="{{ ingrediente.unidad_medida }}" class="form-control" required>
-    </div>
-    <div class="mb-3">
-      <label for="costo_unitario" class="form-label">Costo Unitario</label>
-      <input type="number" name="costo_unitario" id="costo_unitario" value="{{ ingrediente.costo_unitario }}" class="form-control" step="0.01" required>
-    </div>
-    <div class="mb-3">
-      <label for="proveedor" class="form-label">Proveedor</label>
-      <input type="text" name="proveedor" id="proveedor" value="{{ ingrediente.proveedor|default:"" }}" class="form-control">
-    </div>
-    <div class="mb-3">
-      <label for="fecha_compra" class="form-label">Fecha de Compra</label>
-      <input type="date" name="fecha_compra" id="fecha_compra" value="{{ ingrediente.fecha_compra|date:'Y-m-d' }}" class="form-control" required>
-    </div>
-    <div class="mb-3">
-      <label for="stock_disponible" class="form-label">Stock Disponible</label>
-      <input type="number" name="stock_disponible" id="stock_disponible" value="{{ ingrediente.stock_disponible }}" class="form-control" step="0.01" required>
-    </div>
-    <button type="submit" class="btn btn-primary me-2">Actualizar Ingrediente</button>
-    <a href="{% url 'ver_ingredientes' %}" class="btn btn-secondary">Cancelar</a>
-  </form>
-</div>
-{% endblock %}
-borrar_ingrediente.html
-code
-Html
-{% extends 'base.html' %}
-{% block title %}Borrar Ingrediente{% endblock %}
-{% block content %}
-<div class="card shadow-sm p-4">
-  <h2 class="card-title mb-4">Confirmar Borrado de Ingrediente</h2>
-  <div class="alert alert-warning" role="alert">
-    <p>¿Estás seguro de que deseas eliminar el ingrediente <strong>{{ ingrediente.nombre }}</strong>?</p>
-    <p>¡Esta acción es irreversible!</p>
-  </div>
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger me-2"><i class="bi bi-trash"></i> Sí, Eliminar</button>
-    <a href="{% url 'ver_ingredientes' %}" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Cancelar</a>
-  </form>
-</div>
-{% endblock %}
-22 — Procedimiento para crear el archivo urls.py en app_Panaderia
-Crea app_Panaderia/urls.py:
-code
-Python
-# app_Panaderia/urls.py
-from django.urls import path
-from . import views
 
-urlpatterns = [
-    path('', views.inicio_panaderia, name='inicio_panaderia'),
-    path('ingredientes/agregar/', views.agregar_ingrediente, name='agregar_ingrediente'),
-    path('ingredientes/', views.ver_ingredientes, name='ver_ingredientes'),
-    path('ingredientes/editar/<int:ingrediente_id>/', views.actualizar_ingrediente, name='actualizar_ingrediente'),
-    path('ingredientes/editar/guardar/<int:ingrediente_id>/', views.realizar_actualizacion_ingrediente, name='realizar_actualizacion_ingrediente'),
-    path('ingredientes/borrar/<int:ingrediente_id>/', views.borrar_ingrediente, name='borrar_ingrediente'),
-]
+    <footer class="text-center">
+      <div class="container">
+        <small>
+          &copy; {{ now|date:"Y" }} Derechos reservados. Creado por Técn. Eliseo García, Cbtis 128.
+        </small>
+      </div>
+    </footer>
+    Nota: {{ now|date:"Y" }} funcionará porque timezone.now() se pasa desde la vista inicio_panaderia.
+20 — inicio.html (Información del sistema y una imagen de panadería)
+    Edita app_Panaderia/templates/inicio.html:
+    code
+    Html
+    
+    {% extends 'base.html' %}
+    {% block title %}Inicio - Panadería{% endblock %}
+    {% block content %}
+    <div class="row align-items-center">
+      <div class="col-md-7">
+        <h1 class="display-4">Bienvenido al sistema de administración de Panadería</h1>
+        <p class="lead">Gestiona tus ingredientes, recetas y productos de manera eficiente. Usa el menú superior para navegar por las diferentes secciones del sistema.</p>
+        <hr class="my-4">
+        <p>Empieza gestionando tus ingredientes para asegurar que siempre tengas lo necesario para tus deliciosas creaciones.</p>
+        <a href="{% url 'ver_ingredientes' %}" class="btn btn-primary btn-lg">Ver Ingredientes</a>
+      </div>
+      <div class="col-md-5">
+        <img src="https://images.unsplash.com/photo-1588636100913-9037c7891cf1?w=800&q=80" class="img-fluid rounded shadow-sm" alt="Panadería artesanal">
+      </div>
+    </div>
+    {% endblock %}
+    (Imagen tomada desde la red — URL pública de Unsplash.)
+21 — Templates de Ingredientes (sin validación)
+    Crea los siguientes archivos dentro de app_Panaderia/templates/ingredientes/.
+    agregar_ingrediente.html
+code
+Html
+    
+    {% extends 'base.html' %}
+    {% block title %}Agregar Ingrediente{% endblock %}
+    {% block content %}
+    <div class="card shadow-sm p-4">
+      <h2 class="card-title mb-4">Agregar Nuevo Ingrediente</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" name="nombre" id="nombre" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="descripcion" class="form-label">Descripción</label>
+          <textarea name="descripcion" id="descripcion" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="unidad_medida" class="form-label">Unidad de Medida</label>
+          <input type="text" name="unidad_medida" id="unidad_medida" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="costo_unitario" class="form-label">Costo Unitario</label>
+          <input type="number" name="costo_unitario" id="costo_unitario" class="form-control" step="0.01" required>
+        </div>
+        <div class="mb-3">
+          <label for="proveedor" class="form-label">Proveedor</label>
+          <input type="text" name="proveedor" id="proveedor" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="fecha_compra" class="form-label">Fecha de Compra</label>
+          <input type="date" name="fecha_compra" id="fecha_compra" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="stock_disponible" class="form-label">Stock Disponible</label>
+          <input type="number" name="stock_disponible" id="stock_disponible" class="form-control" step="0.01" required>
+        </div>
+        <button type="submit" class="btn btn-primary me-2">Guardar Ingrediente</button>
+        <a href="{% url 'ver_ingredientes' %}" class="btn btn-secondary">Cancelar</a>
+      </form>
+    </div>
+    {% endblock %}
+    ver_ingredientes.html
+code
+Html
+    
+    {% extends 'base.html' %}
+    {% block title %}Ver Ingredientes{% endblock %}
+    {% block content %}
+    <div class="card shadow-sm p-4">
+      <h2 class="card-title mb-4">Lista de Ingredientes</h2>
+      <a href="{% url 'agregar_ingrediente' %}" class="btn btn-success mb-3"><i class="bi bi-plus-circle"></i> Agregar Ingrediente</a>
+      {% if ingredientes %}
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Unidad de Medida</th>
+              <th>Costo Unitario</th>
+              <th>Proveedor</th>
+              <th>Fecha de Compra</th>
+              <th>Stock Disponible</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for ingrediente in ingredientes %}
+            <tr>
+              <td>{{ ingrediente.nombre }}</td>
+              <td>{{ ingrediente.unidad_medida }}</td>
+              <td>${{ ingrediente.costo_unitario }}</td>
+              <td>{{ ingrediente.proveedor|default:"N/A" }}</td>
+              <td>{{ ingrediente.fecha_compra }}</td>
+              <td>{{ ingrediente.stock_disponible }}</td>
+              <td>
+                <a class="btn btn-sm btn-info me-1" href="{% url 'actualizar_ingrediente' ingrediente.id %}"><i class="bi bi-pencil-square"></i> Editar</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'borrar_ingrediente' ingrediente.id %}"><i class="bi bi-trash"></i> Borrar</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="alert alert-info mt-3" role="alert">
+        No hay ingredientes registrados. ¡Empieza agregando uno!
+      </div>
+      {% endif %}
+    </div>
+    {% endblock %}
+    actualizar_ingrediente.html
+    code
+    Html
+    {% extends 'base.html' %}
+    {% block title %}Actualizar Ingrediente{% endblock %}
+    {% block content %}
+    <div class="card shadow-sm p-4">
+      <h2 class="card-title mb-4">Editar Ingrediente</h2>
+      <form method="post" action="{% url 'realizar_actualizacion_ingrediente' ingrediente.id %}">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" name="nombre" id="nombre" value="{{ ingrediente.nombre }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="descripcion" class="form-label">Descripción</label>
+          <textarea name="descripcion" id="descripcion" class="form-control">{{ ingrediente.descripcion|default:"" }}</textarea>
+        </div>
+        <div class="mb-3">
+          <label for="unidad_medida" class="form-label">Unidad de Medida</label>
+          <input type="text" name="unidad_medida" id="unidad_medida" value="{{ ingrediente.unidad_medida }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="costo_unitario" class="form-label">Costo Unitario</label>
+          <input type="number" name="costo_unitario" id="costo_unitario" value="{{ ingrediente.costo_unitario }}" class="form-control" step="0.01" required>
+        </div>
+        <div class="mb-3">
+          <label for="proveedor" class="form-label">Proveedor</label>
+          <input type="text" name="proveedor" id="proveedor" value="{{ ingrediente.proveedor|default:"" }}" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="fecha_compra" class="form-label">Fecha de Compra</label>
+          <input type="date" name="fecha_compra" id="fecha_compra" value="{{ ingrediente.fecha_compra|date:'Y-m-d' }}" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="stock_disponible" class="form-label">Stock Disponible</label>
+          <input type="number" name="stock_disponible" id="stock_disponible" value="{{ ingrediente.stock_disponible }}" class="form-control" step="0.01" required>
+        </div>
+        <button type="submit" class="btn btn-primary me-2">Actualizar Ingrediente</button>
+        <a href="{% url 'ver_ingredientes' %}" class="btn btn-secondary">Cancelar</a>
+      </form>
+    </div>
+    {% endblock %}
+    borrar_ingrediente.html
+    code
+    Html
+    {% extends 'base.html' %}
+    {% block title %}Borrar Ingrediente{% endblock %}
+    {% block content %}
+    <div class="card shadow-sm p-4">
+      <h2 class="card-title mb-4">Confirmar Borrado de Ingrediente</h2>
+      <div class="alert alert-warning" role="alert">
+        <p>¿Estás seguro de que deseas eliminar el ingrediente <strong>{{ ingrediente.nombre }}</strong>?</p>
+        <p>¡Esta acción es irreversible!</p>
+      </div>
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger me-2"><i class="bi bi-trash"></i> Sí, Eliminar</button>
+        <a href="{% url 'ver_ingredientes' %}" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Cancelar</a>
+      </form>
+    </div>
+    {% endblock %}
+22 — Procedimiento para crear el archivo urls.py en app_Panaderia
+    
+Crea app_Panaderia/urls.py:
+
+Python
+    # app_Panaderia/urls.py
+    
+    from django.urls import path
+    from . import views
+    
+    urlpatterns = [
+        path('', views.inicio_panaderia, name='inicio_panaderia'),
+        path('ingredientes/agregar/', views.agregar_ingrediente, name='agregar_ingrediente'),
+        path('ingredientes/', views.ver_ingredientes, name='ver_ingredientes'),
+        path('ingredientes/editar/<int:ingrediente_id>/', views.actualizar_ingrediente, name='actualizar_ingrediente'),
+        path('ingredientes/editar/guardar/<int:ingrediente_id>/', views.realizar_actualizacion_ingrediente, name='realizar_actualizacion_ingrediente'),
+        path('ingredientes/borrar/<int:ingrediente_id>/', views.borrar_ingrediente, name='borrar_ingrediente'),
+    ]
 23 — Procedimiento para agregar app_Panaderia en settings.py de backend_Panaderia
 En backend_Panaderia/settings.py, en la lista INSTALLED_APPS, añade 'app_Panaderia':
 code
 Python
 # backend_Panaderia/settings.py
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'app_Panaderia', # <-- ¡Añadir esta línea!
-]
+
+    INSTALLED_APPS = [
+        'django.contrib.admin',
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        'app_Panaderia', # <-- ¡Añadir esta línea!
+    ]
 Además, asegúrate de que 'django.template.context_processors.request' esté en TEMPLATES['OPTIONS']['context_processors'] para que el now en el footer funcione correctamente (normalmente viene por defecto):
 code
 Python
