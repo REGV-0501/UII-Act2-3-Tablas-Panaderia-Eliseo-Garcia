@@ -211,129 +211,132 @@ app_Panaderia/views.py
 Crea la siguiente estructura de carpetas y archivos dentro de app_Panaderia/:
 code
 Code
-app_Panaderia/
-    templates/
-        base.html
-        navbar.html
-        footer.html
-        inicio.html
-        ingredientes/
-            agregar_ingrediente.html
-            ver_ingredientes.html
-            actualizar_ingrediente.html
-            borrar_ingrediente.html
-Puedes crear esto con VS Code o en la terminal (desde la raíz del proyecto UIII_Panadería_0501):
-code
-Bash
-mkdir -p app_Panaderia/templates/ingredientes
-touch app_Panaderia/templates/base.html \
-      app_Panaderia/templates/navbar.html \
-      app_Panaderia/templates/footer.html \
-      app_Panaderia/templates/inicio.html
-touch app_Panaderia/templates/ingredientes/agregar_ingrediente.html \
-      app_Panaderia/templates/ingredientes/ver_ingredientes.html \
-      app_Panaderia/templates/ingredientes/actualizar_ingrediente.html \
-      app_Panaderia/templates/ingredientes/borrar_ingrediente.html
+
+    app_Panaderia/
+        templates/
+            base.html
+            navbar.html
+            footer.html
+            inicio.html
+            ingredientes/
+                agregar_ingrediente.html
+                ver_ingredientes.html
+                actualizar_ingrediente.html
+                borrar_ingrediente.html
+   Puedes crear esto con VS Code o en la terminal (desde la raíz del proyecto UIII_Panadería_0501):
+   
+    code
+    Bash
+    mkdir -p app_Panaderia/templates/ingredientes
+    touch app_Panaderia/templates/base.html \
+          app_Panaderia/templates/navbar.html \
+          app_Panaderia/templates/footer.html \
+          app_Panaderia/templates/inicio.html
+    touch app_Panaderia/templates/ingredientes/agregar_ingrediente.html \
+          app_Panaderia/templates/ingredientes/ver_ingredientes.html \
+          app_Panaderia/templates/ingredientes/actualizar_ingrediente.html \
+          app_Panaderia/templates/ingredientes/borrar_ingrediente.html
 (No es necesario header.html ya que navbar.html y base.html cubren esa funcionalidad en la plantilla inicial).
 17 — base.html (Agregar Bootstrap para CSS y JS)
 Edita app_Panaderia/templates/base.html:
 code
 Html
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{% block title %}Sistema Panadería{% endblock %}</title>
-  <!-- Bootstrap CSS (CDN) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Icons CDN -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <style>
-    /* Colores suaves y modernos */
-    body { background: #fdf5e6; color: #4a2c2a; } /* Tonos crema y marrón suave */
-    .navbar { background-color: #ffffff; border-bottom: 1px solid #e0d9cd; }
-    .navbar-brand { font-weight: 700; color: #8b4513; } /* Marrón chocolate */
-    .nav-link { color: #5a3c3b; }
-    .nav-link:hover { color: #8b4513; }
-    .btn-primary { background-color: #8b4513; border-color: #8b4513; }
-    .btn-primary:hover { background-color: #a0522d; border-color: #a0522d; }
-    .btn-success { background-color: #5cb85c; border-color: #5cb85c; }
-    .btn-info { background-color: #5bc0de; border-color: #5bc0de; }
-    .btn-danger { background-color: #d9534f; border-color: #d9534f; }
-    .btn-secondary { background-color: #6c757d; border-color: #6c757d; }
-    footer { position: fixed; bottom: 0; left: 0; right: 0; background:#fff; padding:8px 16px; border-top:1px solid #e6e9ec; color: #5a3c3b;}
-    .main-container { padding-bottom: 70px; } /* espacio para footer fijo */
-  </style>
-  {% block extra_head %}{% endblock %}
-</head>
-<body>
-  {% include 'navbar.html' %}
-  <div class="container main-container mt-4">
-    {% block content %}{% endblock %}
-  </div>
 
-  {% include 'footer.html' %}
-
-  <!-- Bootstrap JS (CDN) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  {% block extra_js %}{% endblock %}
-</body>
-</html>
-18 — navbar.html (Incluir opciones con iconos)
-Edita app_Panaderia/templates/navbar.html:
-code
-Html
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-  <div class="container">
-    <a class="navbar-brand" href="{% url 'inicio_panaderia' %}">🍞 Sistema de Administración Panadería</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navMenu">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="{% url 'inicio_panaderia' %}"><i class="bi bi-house-fill"></i> Inicio</a></li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="ingredientesDrop" role="button" data-bs-toggle="dropdown">
-            <i class="bi bi-egg-fried"></i> Ingredientes
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="ingredientesDrop">
-            <li><a class="dropdown-item" href="{% url 'agregar_ingrediente' %}">Agregar Ingrediente</a></li>
-            <li><a class="dropdown-item" href="{% url 'ver_ingredientes' %}">Ver Ingredientes</a></li>
-            <!-- Los enlaces de actualizar y borrar se manejan en la tabla de ver ingredientes -->
-            <!-- <li><a class="dropdown-item" href="#">Actualizar Ingrediente</a></li> -->
-            <!-- <li><a class="dropdown-item" href="#">Borrar Ingrediente</a></li> -->
+    <!doctype html>
+    <html lang="es">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>{% block title %}Sistema Panadería{% endblock %}</title>
+      <!-- Bootstrap CSS (CDN) -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Bootstrap Icons CDN -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+      <style>
+        /* Colores suaves y modernos */
+        body { background: #fdf5e6; color: #4a2c2a; } /* Tonos crema y marrón suave */
+        .navbar { background-color: #ffffff; border-bottom: 1px solid #e0d9cd; }
+        .navbar-brand { font-weight: 700; color: #8b4513; } /* Marrón chocolate */
+        .nav-link { color: #5a3c3b; }
+        .nav-link:hover { color: #8b4513; }
+        .btn-primary { background-color: #8b4513; border-color: #8b4513; }
+        .btn-primary:hover { background-color: #a0522d; border-color: #a0522d; }
+        .btn-success { background-color: #5cb85c; border-color: #5cb85c; }
+        .btn-info { background-color: #5bc0de; border-color: #5bc0de; }
+        .btn-danger { background-color: #d9534f; border-color: #d9534f; }
+        .btn-secondary { background-color: #6c757d; border-color: #6c757d; }
+        footer { position: fixed; bottom: 0; left: 0; right: 0; background:#fff; padding:8px 16px; border-top:1px solid #e6e9ec; color: #5a3c3b;}
+        .main-container { padding-bottom: 70px; } /* espacio para footer fijo */
+      </style>
+      {% block extra_head %}{% endblock %}
+    </head>
+    <body>
+      {% include 'navbar.html' %}
+      <div class="container main-container mt-4">
+        {% block content %}{% endblock %}
+      </div>
+    
+      {% include 'footer.html' %}
+    
+      <!-- Bootstrap JS (CDN) -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+      {% block extra_js %}{% endblock %}
+    </body>
+    </html>
+    18 — navbar.html (Incluir opciones con iconos)
+    Edita app_Panaderia/templates/navbar.html:
+    code
+    Html
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'inicio_panaderia' %}">🍞 Sistema de Administración Panadería</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="{% url 'inicio_panaderia' %}"><i class="bi bi-house-fill"></i> Inicio</a></li>
+    
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="ingredientesDrop" role="button" data-bs-toggle="dropdown">
+                <i class="bi bi-egg-fried"></i> Ingredientes
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="ingredientesDrop">
+                <li><a class="dropdown-item" href="{% url 'agregar_ingrediente' %}">Agregar Ingrediente</a></li>
+                <li><a class="dropdown-item" href="{% url 'ver_ingredientes' %}">Ver Ingredientes</a></li>
+                <!-- Los enlaces de actualizar y borrar se manejan en la tabla de ver ingredientes -->
+                <!-- <li><a class="dropdown-item" href="#">Actualizar Ingrediente</a></li> -->
+                <!-- <li><a class="dropdown-item" href="#">Borrar Ingrediente</a></li> -->
+              </ul>
+            </li>
+    
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="recetasDrop" role="button" data-bs-toggle="dropdown">
+                <i class="bi bi-journal-text"></i> Recetas
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="recetasDrop">
+                <li><a class="dropdown-item" href="#">Agregar Receta</a></li>
+                <li><a class="dropdown-item" href="#">Ver Recetas</a></li>
+                <li><a class="dropdown-item" href="#">Actualizar Receta</a></li>
+                <li><a class="dropdown-item" href="#">Borrar Receta</a></li>
+              </ul>
+            </li>
+    
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="productosDrop" role="button" data-bs-toggle="dropdown">
+                <i class="bi bi-bag"></i> Productos
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="productosDrop">
+                <li><a class="dropdown-item" href="#">Agregar Producto</a></li>
+                <li><a class="dropdown-item" href="#">Ver Productos</a></li>
+                <li><a class="dropdown-item" href="#">Actualizar Producto</a></li>
+                <li><a class="dropdown-item" href="#">Borrar Producto</a></li>
+              </ul>
+            </li>
           </ul>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="recetasDrop" role="button" data-bs-toggle="dropdown">
-            <i class="bi bi-journal-text"></i> Recetas
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="recetasDrop">
-            <li><a class="dropdown-item" href="#">Agregar Receta</a></li>
-            <li><a class="dropdown-item" href="#">Ver Recetas</a></li>
-            <li><a class="dropdown-item" href="#">Actualizar Receta</a></li>
-            <li><a class="dropdown-item" href="#">Borrar Receta</a></li>
-          </ul>
-        </li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="productosDrop" role="button" data-bs-toggle="dropdown">
-            <i class="bi bi-bag"></i> Productos
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="productosDrop">
-            <li><a class="dropdown-item" href="#">Agregar Producto</a></li>
-            <li><a class="dropdown-item" href="#">Ver Productos</a></li>
-            <li><a class="dropdown-item" href="#">Actualizar Producto</a></li>
-            <li><a class="dropdown-item" href="#">Borrar Producto</a></li>
-          </ul>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+        </div>
+      </div>
+    </nav>
 19 — footer.html (Incluir derechos de autor y mantenerlo fijo)
 Edita app_Panaderia/templates/footer.html:
 code
