@@ -50,14 +50,16 @@ Selecciona el que apunta a .../UIII_Panadería_0501/.venv/bin/python (o equivale
 8 — Procedimiento para instalar Django  
 Con el entorno virtual activado:  
 code  
-Bash
-pip install --upgrade pip
-pip install django
+
+    Bash
+    pip install --upgrade pip
+    pip install django
 9 — Procedimiento para crear proyecto backend_Panaderia sin duplicar carpeta
 Para evitar que Django cree una carpeta anidada con el mismo nombre, ejecuta (asegúrate de estar en la raíz del proyecto UIII_Panadería_0501):
 code
-Bash
-django-admin startproject backend_Panaderia .
+
+    Bash
+    django-admin startproject backend_Panaderia .
 Nota: El punto . hace que los archivos de proyecto estén directamente en la carpeta actual y evita crear UIII_Panadería_0501/backend_Panaderia/backend_Panaderia.
 10 — Procedimiento para ejecutar servidor en el puerto 8014
 Asegúrate de estar en la raíz del proyecto (UIII_Panadería_0501) y con el entorno virtual .venv activado:
