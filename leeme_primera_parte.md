@@ -1,6 +1,4 @@
-
 Model
-¡Excelente! Aquí tienes la primera parte del proyecto "Panadería" con todas las especificaciones que solicitaste, siguiendo la estructura y los pasos detallados para que puedas implementarlo fácilmente en VS Code con Python/Django.  
 Proyecto: Panadería  
 Lenguaje: Python  
 Framework: Django  
